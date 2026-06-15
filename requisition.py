@@ -47,4 +47,26 @@ class Requisition:
 
         return self.status
     
+    def manager_response(self, decision):
+
+        if self.status == "Pending":
+
+            if decision.lower() == "approved":
+
+                self.status = "Approved"
+
+                last_three = str(self.requisition_id)[-3:]
+
+                self.approval_reference = (
+                    self.staff_id + last_three
+                )
+
+            elif decision.lower() == "not approved":
+
+                self.status = "Not approved"
+
+                self.approval_reference = "Not available"
+
+        return self.status
+    
     
