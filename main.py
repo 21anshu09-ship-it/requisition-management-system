@@ -12,6 +12,10 @@ items = [
     {"name": "Keyboard", "price": 100}
 ]
 
-total = r1.add_requisition(items)
+r1.add_requisition(items)
 
-print("Requisition Total:", total)
+status = r1.approve_requisition()
+
+print("Total:", r1.total)
+print("Status:", status)
+print("Approval Reference:", r1.approval_reference)
