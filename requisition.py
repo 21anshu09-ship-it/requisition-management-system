@@ -24,3 +24,23 @@ class Requisition:
         self.total = sum(item["price"] for item in items)
 
         return self.total
+    
+    def approve_requisition(self):
+
+        if self.total < 500:
+
+            self.status = "Approved"
+
+            last_three = str(self.requisition_id)[-3:]
+
+            self.approval_reference = (
+                self.staff_id + last_three
+            )
+
+        else:
+
+            self.status = "Pending"
+
+            self.approval_reference = "Not available"
+
+        return self.status
