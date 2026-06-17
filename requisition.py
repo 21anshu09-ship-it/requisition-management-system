@@ -1,12 +1,14 @@
 class Requisition:
 
     requisition_counter = 10000
+    requisitions = []
 
     def __init__(self, date, staff_id, staff_name):
 
         self.date = date
         self.staff_id = staff_id
         self.staff_name = staff_name
+        Requisition.requisitions.append(self)
 
         self.items = []
 
@@ -66,3 +68,40 @@ class Requisition:
                 self.approval_reference = "Not available"
 
         return self.status
+    
+    def display_requisition(self):
+
+        print("\nDate:", self.date)
+        print("Requisition ID:", self.requisition_id)
+        print("Staff ID:", self.staff_id)
+        print("Staff Name:", self.staff_name)
+        print("Total:", self.total)
+        print("Status:", self.status)
+        print("Approval Reference Number:",
+            self.approval_reference)
+    
+    @classmethod
+    def requisition_statistics(cls):
+
+        total = len(cls.requisitions)
+
+        approved = sum(
+            1 for req in cls.requisitions
+            if req.status == "Approved"
+        )
+
+        pending = sum(
+            1 for req in cls.requisitions
+            if req.status == "Pending"
+        )
+
+        not_approved = sum(
+            1 for req in cls.requisitions
+            if req.status == "Not approved"
+        )
+
+        print("\nREQUISITION STATISTICS")
+        print("Total Requisitions:", total)
+        print("Approved:", approved)
+        print("Pending:", pending)
+        print("Not Approved:", not_approved)
